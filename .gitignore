@@ -1,0 +1,17 @@
+# Environment variables - Contains secrets!
+.env
+
+# Databases - Don't commit the local database.
+*.db
+*.sqlite3
+
+# Python virtual environment - Can be huge and is specific to your machine.
+venv/
+/venv/
+
+# Python cache files - Generated automatically by Python.
+__pycache__/
+*.pyc
+
+# Render-specific files (optional but good practice)
+.render

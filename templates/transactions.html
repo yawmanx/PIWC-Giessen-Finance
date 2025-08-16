@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}All Transactions{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">All Transactions</h1>
+</div>
+
+{# Add search/filter controls here in the future #}
+<div class="card mb-4">
+    <div class="card-body">
+        <p>Future enhancements: Add filters by date range, category, or type here.</p>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Type</th>
+                <th scope="col">Category</th>
+                <th scope="col">Description</th>
+                <th scope="col" class="text-end">Amount</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tx in transactions %}
+            <tr>
+                <td>{{ tx.date.strftime('%Y-%m-%d') }}</td>
+                <td>
+                    {% if tx.type == 'Income' %}
+                        <span class="badge bg-success">{{ tx.type }}</span>
+                    {% else %}
+                        <span class="badge bg-danger">{{ tx.type }}</span>
+                    {% endif %}
+                </td>
+                <td>{{ tx.category }}</td>
+                <td>{{ tx.description }}</td>
+                <td class="text-end">€{{ "%.2f"|format(tx.amount) }}</td>
+                <td>
+                    {# These links point to routes you would need to create for editing/deleting #}
+                    <a href="#" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center">No transactions found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{# Add pagination controls here when you implement it #}
+
+{% endblock %}
